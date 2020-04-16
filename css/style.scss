@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+main {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+    grid-gap: 5px;
+
+    section {
+        height: calc(100vh - 20px);
+        overflow: scroll;
+        background-color: rgb(212, 212, 212);
+        padding: 0 20px;
+
+        h1 {
+            font-size: 3rem;
+        }
+    }
+
+    .cards {
+        height: auto;
+        padding: 0;
+    }
+
+    .card {
+        .top {
+            position: relative;
+            background-color: white;
+            padding: 20px;
+            padding-bottom: 5px;
+
+            h2 {
+                margin-top: 0;
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+
+            p {
+                font-weight: 300;
+                margin: 5px 0;
+                font-size: 1.6rem;
+            }
+
+            .creator {
+                font-style: italic;
+                font-size: 1.2rem;
+                margin-top: 15px;
+            }
+
+            .delete-this {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        .bottom {
+            background-color: #F1F1F1;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            font-weight: 300;
+            font-size: 1.6rem;
+
+            p {
+                margin: 0;
+            }
+
+            .priority {
+                font-weight: bold;
+            }
+        }
+    }
+
+    // #todo {}
+
+    // #progress {}
+
+    // #done {}
+
+    // #add {}
+}

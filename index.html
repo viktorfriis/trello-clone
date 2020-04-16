@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trello Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section id="todo">
+            <h1>To do</h1>
+            <section class="cards">
+            </section>
+        </section>
+        <section id="progress">
+            <h1>In progress</h1>
+            <section class="cards"></section>
+        </section>
+        <section id="done">
+            <h1>Done</h1>
+            <section class="cards"></section>
+        </section>
+        <section id="add"></section>
+    </main>
+    <script src="script.js"></script>
+    <template>
+        <article class="card">
+            <div class="top">
+                <h2 class="title"></h2>
+                <p class="desc"></p>
+                <p class="creator">Added by: </p>
+                <button class="delete-this">X</button>
+            </div>
+            <div class="bottom">
+                <p class="estimate"><i class="far fa-clock"></i> </p>
+                <p class="deadline"><i class="far fa-calendar"></i> </p>
+                <p class="priority"></p>
+            </div>
+        </article>
+    </template>
+
+    <script src="https://kit.fontawesome.com/fc2f766fb7.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
