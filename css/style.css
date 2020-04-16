@@ -24,7 +24,6 @@ main {
 
 main section {
   height: calc(100vh - 20px);
-  overflow: scroll;
   background-color: #d4d4d4;
   padding: 0 20px;
 }
@@ -36,6 +35,12 @@ main section h1 {
 main .cards {
   height: auto;
   padding: 0;
+  overflow: scroll;
+  height: calc(100vh - 130px);
+}
+
+main .card {
+  margin-bottom: 10px;
 }
 
 main .card .top {
@@ -85,7 +90,57 @@ main .card .bottom p {
   margin: 0;
 }
 
-main .card .bottom .priority {
+main #add {
+  background-color: white;
+}
+
+form {
+  margin-top: 30px;
+}
+
+form fieldset {
+  border: none;
+}
+
+form fieldset legend {
+  font-size: 3rem;
   font-weight: bold;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+form fieldset label,
+form fieldset input {
+  display: block;
+}
+
+form fieldset label {
+  margin-bottom: 0;
+  margin-left: 0;
+  color: grey;
+  font-size: 1.1rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+form fieldset input,
+form fieldset textarea,
+form fieldset select {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid grey;
+  font-size: 1.1rem;
+}
+
+form fieldset input:focus,
+form fieldset textarea:focus,
+form fieldset select:focus {
+  outline: none;
+  border: 1px solid blue;
+}
+
+form fieldset input:valid {
+  border: 1px solid green;
 }
 /*# sourceMappingURL=style.css.map */

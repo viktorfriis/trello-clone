@@ -20,7 +20,6 @@ main {
 
     section {
         height: calc(100vh - 20px);
-        overflow: scroll;
         background-color: rgb(212, 212, 212);
         padding: 0 20px;
 
@@ -32,9 +31,13 @@ main {
     .cards {
         height: auto;
         padding: 0;
+        overflow: scroll;
+        height: calc(100vh - 130px);
     }
 
     .card {
+        margin-bottom: 10px;
+
         .top {
             position: relative;
             background-color: white;
@@ -78,10 +81,6 @@ main {
             p {
                 margin: 0;
             }
-
-            .priority {
-                font-weight: bold;
-            }
         }
     }
 
@@ -91,5 +90,68 @@ main {
 
     // #done {}
 
-    // #add {}
+    #add {
+        background-color: white;
+    }
+}
+
+
+form {
+    margin-top: 30px;
+
+    fieldset {
+        border: none;
+
+        legend {
+            font-size: 3rem;
+            font-weight: bold;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        label,
+        input {
+            display: block;
+        }
+
+        label {
+            margin-bottom: 0;
+            margin-left: 0;
+            color: grey;
+
+            font-size: 1.1rem;
+            // transform: translateY(29px) translateX(1px);
+            // pointer-events: none;
+
+            transition: 0.2s;
+        }
+
+        // .move-label {
+        //     font-size: 0.6rem;
+        //     transform: translateY(0) translateX(0);
+        // }
+
+        input,
+        textarea,
+        select {
+            margin-bottom: 20px;
+            width: 100%;
+            height: 40px;
+            // padding-left: 10px;
+
+            border: 1px solid grey;
+            font-size: 1.1rem;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border: 1px solid blue;
+        }
+
+        input:valid {
+            border: 1px solid green;
+        }
+    }
 }

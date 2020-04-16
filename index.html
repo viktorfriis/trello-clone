@@ -24,9 +24,43 @@
             <h1>Done</h1>
             <section class="cards"></section>
         </section>
-        <section id="add"></section>
+        <section id="add">
+            <form action="#">
+                <fieldset>
+                    <legend>Add card</legend>
+                    <label for="inp-title">Title</label>
+                    <input type="text" id="inp-title" required>
+
+                    <label for="inp-desc">Description</label>
+                    <textarea id="inp-desc" required></textarea>
+
+                    <label for="inp-creator">Creator</label>
+                    <select id="inp-creator">
+                        <option value="">-</option>
+                        <option value="Viktor Kjeldal">Viktor Kjeldal</option>
+                        <option value="John Appleseed">John Appleseed</option>
+                        <option value="Albert Einstein">Albert Einstein</option>
+                    </select>
+
+                    <label for="inp-estimate">Estimate time (in hours)</label>
+                    <input type="number" id="inp-estimate" min="1" max="8">
+
+                    <label for="inp-deadline">Deadline</label>
+                    <input type="date" id="inp-deadline">
+
+                    <label for="inp-priority">Priority</label>
+                    <select id="inp-priority">
+                        <option value="">-</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <button class="add-new" type="submit">Add new card</button>
+                </fieldset>
+            </form>
+        </section>
     </main>
-    <script src="script.js"></script>
+
     <template>
         <article class="card">
             <div class="top">
@@ -36,13 +70,13 @@
                 <button class="delete-this">X</button>
             </div>
             <div class="bottom">
-                <p class="estimate"><i class="far fa-clock"></i> </p>
-                <p class="deadline"><i class="far fa-calendar"></i> </p>
-                <p class="priority"></p>
+                <p class="estimate"><i class="far fa-clock"></i><span></span></p>
+                <p class="deadline"><i class="far fa-calendar"></i><span></span></p>
+                <p class="priority"><i class="fas fa-balance-scale"></i><span></span></p>
             </div>
         </article>
     </template>
-
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/fc2f766fb7.js" crossorigin="anonymous"></script>
 </body>
 
