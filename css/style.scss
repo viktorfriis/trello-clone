@@ -64,22 +64,51 @@ main {
 
             .delete-this {
                 position: absolute;
-                top: 20px;
-                right: 20px;
+                top: 15px;
+                right: 15px;
+                background-color: transparent;
+                appearance: none;
+                border: none;
+                outline: none;
+                cursor: pointer;
+            }
+
+            .card-nav {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                display: flex;
+
+                span {
+                    cursor: pointer;
+                }
+
+                .visible {
+                    opacity: 1;
+                    cursor: pointer;
+                }
+
+                .hidden {
+                    opacity: 0;
+                    cursor: default;
+                }
             }
         }
 
         .bottom {
             background-color: #F1F1F1;
             padding: 30px 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            justify-items: center;
             font-weight: 300;
             font-size: 1.6rem;
+            display: flex;
+            justify-content: space-around;
 
             p {
                 margin: 0;
+            }
+
+            .material-icons {
+                transform: translateY(6px);
             }
         }
     }

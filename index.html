@@ -7,6 +7,7 @@
     <title>Trello Clone</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -29,13 +30,13 @@
                 <fieldset>
                     <legend>Add card</legend>
                     <label for="inp-title">Title</label>
-                    <input type="text" id="inp-title" required>
+                    <input type="text" name="title" id="inp-title" required>
 
                     <label for="inp-desc">Description</label>
-                    <textarea id="inp-desc" required></textarea>
+                    <textarea id="inp-desc" name="description" required></textarea>
 
                     <label for="inp-creator">Creator</label>
-                    <select id="inp-creator">
+                    <select name="creator" id="inp-creator">
                         <option value="">-</option>
                         <option value="Viktor Kjeldal">Viktor Kjeldal</option>
                         <option value="John Appleseed">John Appleseed</option>
@@ -43,13 +44,13 @@
                     </select>
 
                     <label for="inp-estimate">Estimate time (in hours)</label>
-                    <input type="number" id="inp-estimate" min="1" max="8">
+                    <input type="number" name="estimate" id="inp-estimate" min="1" max="8">
 
                     <label for="inp-deadline">Deadline</label>
-                    <input type="date" id="inp-deadline">
+                    <input type="date" name="deadline" id="inp-deadline">
 
                     <label for="inp-priority">Priority</label>
-                    <select id="inp-priority">
+                    <select name="priority" id="inp-priority">
                         <option value="">-</option>
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
@@ -67,17 +68,32 @@
                 <h2 class="title"></h2>
                 <p class="desc"></p>
                 <p class="creator">Added by: </p>
-                <button class="delete-this">X</button>
+                <button class="delete-this"><span class="material-icons">
+                        remove_circle_outline
+                    </span></button>
+                <div class="card-nav">
+                    <span class="material-icons move-left">
+                        navigate_before
+                    </span>
+                    <span class="material-icons move-right">
+                        navigate_next
+                    </span>
+                </div>
             </div>
             <div class="bottom">
-                <p class="estimate"><i class="far fa-clock"></i><span></span></p>
-                <p class="deadline"><i class="far fa-calendar"></i><span></span></p>
-                <p class="priority"><i class="fas fa-balance-scale"></i><span></span></p>
+                <p class="estimate"><span class="material-icons">
+                        schedule
+                    </span><span></span></p>
+                <p class="deadline"><span class="material-icons">
+                        event
+                    </span><span></span></p>
+                <p class="priority"><span class="material-icons">
+                        priority_high
+                    </span><span></span></p>
             </div>
         </article>
     </template>
     <script src="script.js"></script>
-    <script src="https://kit.fontawesome.com/fc2f766fb7.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

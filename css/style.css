@@ -70,24 +70,59 @@ main .card .top .creator {
 
 main .card .top .delete-this {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+main .card .top .card-nav {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main .card .top .card-nav span {
+  cursor: pointer;
+}
+
+main .card .top .card-nav .visible {
+  opacity: 1;
+  cursor: pointer;
+}
+
+main .card .top .card-nav .hidden {
+  opacity: 0;
+  cursor: default;
 }
 
 main .card .bottom {
   background-color: #F1F1F1;
   padding: 30px 20px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
   font-weight: 300;
   font-size: 1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 main .card .bottom p {
   margin: 0;
+}
+
+main .card .bottom .material-icons {
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
 }
 
 main #add {
