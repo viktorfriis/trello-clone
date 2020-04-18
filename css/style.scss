@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    background-color: rgb(39, 39, 39);
 }
 
 html {
@@ -20,11 +21,13 @@ main {
 
     section {
         height: calc(100vh - 20px);
-        background-color: rgb(212, 212, 212);
+        background-color: rgb(75, 75, 75);
         padding: 0 20px;
+        border-radius: 5px;
 
         h1 {
             font-size: 3rem;
+            color: white;
         }
     }
 
@@ -43,6 +46,8 @@ main {
             background-color: white;
             padding: 20px;
             padding-bottom: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
 
             h2 {
                 margin-top: 0;
@@ -102,6 +107,8 @@ main {
             font-size: 1.6rem;
             display: flex;
             justify-content: space-around;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
 
             p {
                 margin: 0;
@@ -120,7 +127,7 @@ main {
     // #done {}
 
     #add {
-        background-color: white;
+        background-color: transparent;
     }
 }
 
@@ -136,6 +143,7 @@ form {
             font-weight: bold;
             padding: 0;
             margin-bottom: 10px;
+            color: white;
         }
 
         label,
@@ -144,15 +152,14 @@ form {
         }
 
         label {
-            margin-bottom: 0;
+            margin-bottom: 3px;
             margin-left: 0;
             color: grey;
+            font-size: 1.2rem;
 
-            font-size: 1.1rem;
             // transform: translateY(29px) translateX(1px);
             // pointer-events: none;
-
-            transition: 0.2s;
+            // transition: 0.2s;
         }
 
         // .move-label {
@@ -166,21 +173,61 @@ form {
             margin-bottom: 20px;
             width: 100%;
             height: 40px;
-            // padding-left: 10px;
+            padding-left: 10px;
+            border: none;
+            font-size: 1.4rem;
+            background-color: rgb(75, 75, 75);
+            color: white;
+            border-radius: 5px;
+        }
 
-            border: 1px solid grey;
-            font-size: 1.1rem;
+        textarea {
+            padding-top: 10px;
+            height: 80px;
         }
 
         input:focus,
         textarea:focus,
         select:focus {
             outline: none;
-            border: 1px solid blue;
         }
 
-        input:valid {
+        .add-new {
+            appearance: none;
+            width: 50%;
+            height: 40px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .add-new:disabled {
+            background-color: rgb(75, 75, 75);
+            color: rgb(184, 184, 184);
+            cursor: default;
+        }
+
+        .valid {
             border: 1px solid green;
+        }
+
+        .invalid {
+            border: 1px solid red;
+        }
+
+        .error {
+            color: white;
+            margin-top: -24px;
+            margin-bottom: 20px;
+            background-color: red;
+            padding: 7px;
+            z-index: 10;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            display: none;
         }
     }
 }

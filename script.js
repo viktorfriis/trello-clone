@@ -1,34 +1,231 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", start);
 
-const temp = document.querySelector("template");
+const HTML = {};
 const endPoint = "https://frontendspring20-f2e0.restdb.io/rest/cards";
-const todoContainer = document.querySelector("#todo .cards");
-const progressContainer = document.querySelector("#progress .cards");
-const doneContainer = document.querySelector("#done .cards");
 const APIKey = "5e957b2e436377171a0c2346";
-const form = document.querySelector("form");
-const elements = form.elements;
+let elements;
 
 function start() {
     console.log("start");
-    get();
 
-    form.addEventListener("submit", (e) => {
+    HTML.temp = document.querySelector("template");
+    HTML.todoContainer = document.querySelector("#todo .cards");
+    HTML.form = document.querySelector("form");
+    elements = HTML.form.elements;
+
+    formInteractive();
+    get();
+}
+
+function formInteractive() {
+    HTML.form.setAttribute("novalidate", true);
+
+
+    elements.title.addEventListener("keyup", (e) => {
+        if (e.keyCode === 9 || e.keyCode === 16) {
+
+        } else {
+            if (HTML.form.checkValidity()) {
+                document.querySelector(".add-new").disabled = false;
+            } else {
+                document.querySelector(".add-new").disabled = true;
+            }
+
+            if (elements.title.value != "") {
+                document.querySelector(".title-err").style.display = "none";
+                elements.title.classList.add("valid");
+                elements.title.classList.remove("invalid");
+            } else {
+                document.querySelector(".title-err").style.display = "block";
+                elements.title.classList.remove("valid");
+                elements.title.classList.add("invalid");
+            }
+        }
+    })
+
+    elements.description.addEventListener("keyup", (e) => {
+        if (e.keyCode === 9 || e.keyCode === 16) {
+
+        } else {
+            if (HTML.form.checkValidity()) {
+                document.querySelector(".add-new").disabled = false;
+            } else {
+                document.querySelector(".add-new").disabled = true;
+            }
+
+            if (elements.description.checkValidity()) {
+                document.querySelector(".desc-err").style.display = "none";
+                elements.description.classList.add("valid");
+                elements.description.classList.remove("invalid");
+            } else {
+                if (elements.description.validity.tooShort) {
+                    document.querySelector(".desc-err").textContent = "Please describe the task with more than 1 character.";
+                } else {
+                    document.querySelector(".desc-err").textContent = "Please describe the task.";
+                }
+
+                document.querySelector(".desc-err").style.display = "block";
+                elements.description.classList.remove("valid");
+                elements.description.classList.add("invalid");
+            }
+        }
+    })
+
+    elements.creator.addEventListener("change", () => {
+        if (HTML.form.checkValidity()) {
+            document.querySelector(".add-new").disabled = false;
+        } else {
+            document.querySelector(".add-new").disabled = true;
+        }
+
+        if (elements.creator.value != "") {
+            document.querySelector(".creator-err").style.display = "none";
+            elements.creator.classList.add("valid");
+            elements.creator.classList.remove("invalid");
+        } else {
+            document.querySelector(".creator-err").style.display = "block";
+            elements.creator.classList.remove("valid");
+            elements.creator.classList.add("invalid");
+        }
+    })
+
+    elements.estimate.addEventListener("keyup", (e) => {
+        if (e.keyCode === 9 || e.keyCode === 16) {
+
+        } else {
+            if (HTML.form.checkValidity()) {
+                document.querySelector(".add-new").disabled = false;
+            } else {
+                document.querySelector(".add-new").disabled = true;
+            }
+
+            if (elements.estimate.value != "") {
+                document.querySelector(".estimate-err").style.display = "none";
+                elements.estimate.classList.add("valid");
+                elements.estimate.classList.remove("invalid");
+            } else {
+                document.querySelector(".estimate-err").textContent = "Please give a time estimate of the task."
+                document.querySelector(".estimate-err").style.display = "block";
+                elements.estimate.classList.remove("valid");
+                elements.estimate.classList.add("invalid");
+            }
+
+            if (elements.estimate.validity.rangeOverflow) {
+                document.querySelector(".estimate-err").textContent = "Estimate should be under 8 hours."
+                document.querySelector(".estimate-err").style.display = "block";
+                elements.estimate.classList.remove("valid");
+                elements.estimate.classList.add("invalid");
+            } else if (elements.estimate.validity.rangeUnderflow) {
+                console.log("under 0");
+                document.querySelector(".estimate-err").textContent = "Estimate should be at least 1 hour."
+                document.querySelector(".estimate-err").style.display = "block";
+                elements.estimate.classList.remove("valid");
+                elements.estimate.classList.add("invalid");
+            }
+        }
+    })
+
+    elements.deadline.addEventListener("change", () => {
+        if (HTML.form.checkValidity()) {
+            document.querySelector(".add-new").disabled = false;
+        } else {
+            document.querySelector(".add-new").disabled = true;
+        }
+
+        if (elements.deadline.value != "") {
+            document.querySelector(".deadline-err").style.display = "none";
+            elements.deadline.classList.add("valid");
+            elements.deadline.classList.remove("invalid");
+        } else {
+            document.querySelector(".deadline-err").style.display = "block";
+            elements.deadline.classList.remove("valid");
+            elements.deadline.classList.add("invalid");
+        }
+    })
+
+    elements.priority.addEventListener("change", () => {
+        if (HTML.form.checkValidity()) {
+            document.querySelector(".add-new").disabled = false;
+        } else {
+            document.querySelector(".add-new").disabled = true;
+        }
+
+        if (elements.priority.value != "") {
+            document.querySelector(".priority-err").style.display = "none";
+            elements.priority.classList.add("valid");
+            elements.priority.classList.remove("invalid");
+        } else {
+            document.querySelector(".priority-err").style.display = "block";
+            elements.priority.classList.remove("valid");
+            elements.priority.classList.add("invalid");
+        }
+    })
+
+
+    HTML.form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const data = {
-            title: elements.title.value,
-            description: elements.description.value,
-            creator: elements.creator.value,
-            estimate: elements.estimate.value,
-            deadline: elements.deadline.value,
-            priority: elements.priority.value,
-            dest: "todo"
-        };
+        const formValidity = HTML.form.checkValidity();
 
-        post(data);
+        if (formValidity) {
+            const data = {
+                title: elements.title.value,
+                description: elements.description.value,
+                creator: elements.creator.value,
+                estimate: elements.estimate.value,
+                deadline: elements.deadline.value,
+                priority: elements.priority.value,
+                dest: "todo"
+            };
+
+            clearForm();
+            post(data);
+        } else {
+            console.log("Not valid form");
+            // if (!elements.title.checkValidity()) {
+            //     document.querySelector(".title-err").style.display = "block";
+            // }
+
+            // if (!elements.description.checkValidity()) {
+            //     document.querySelector(".desc-err").style.display = "block";
+            // }
+
+            // if (!elements.creator.checkValidity()) {
+            //     document.querySelector(".creator-err").style.display = "block";
+            // }
+
+            // if (!elements.estimate.checkValidity()) {
+            //     document.querySelector(".estimate-err").style.display = "block";
+            // }
+
+            // if (!elements.deadline.checkValidity()) {
+            //     document.querySelector(".deadline-err").style.display = "block";
+            // }
+
+            // if (!elements.priority.checkValidity()) {
+            //     document.querySelector(".priority-err").style.display = "block";
+            // }
+        }
     })
+}
+
+function clearForm() {
+    elements.title.value = "";
+    elements.description.value = "";
+    elements.creator.value = "";
+    elements.estimate.value = "";
+    elements.deadline.value = "";
+    elements.priority.value = "";
+
+    elements.title.classList.remove("valid");
+    elements.description.classList.remove("valid");
+    elements.creator.classList.remove("valid");
+    elements.estimate.classList.remove("valid");
+    elements.deadline.classList.remove("valid");
+    elements.priority.classList.remove("valid");
+
+    document.querySelector(".add-new").disabled = true;
 }
 
 //GET
@@ -45,6 +242,7 @@ function get() {
         .then(e => showData(e));
 }
 
+//POST
 function post(data) {
     // document.querySelectorAll(`label`).forEach(label => label.classList.remove("move-label"));
 
@@ -52,6 +250,23 @@ function post(data) {
 
     fetch(endPoint + "?max=100", {
             method: "post",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "x-apikey": `${APIKey}`,
+                "cache-control": "no-cache"
+            },
+            body: postData
+        })
+        .then(e => e.json())
+        .then(e => showCard(e));
+}
+
+//PUT 
+function put(id, data) {
+    const postData = JSON.stringify(data);
+
+    fetch(endPoint + "/" + id, {
+            method: "put",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
                 "x-apikey": `${APIKey}`,
@@ -85,7 +300,7 @@ function deleteIt(id) {
 function showData(data) {
     console.log(data);
 
-    todoContainer.innerHTML = "";
+    HTML.todoContainer.innerHTML = "";
 
     data.forEach(e => showCard(e));
 }
@@ -93,7 +308,7 @@ function showData(data) {
 function showCard(e) {
     let dest = e.dest;
 
-    let clone = temp.cloneNode(true).content;
+    let clone = HTML.temp.cloneNode(true).content;
 
     clone.querySelector(".card").dataset.id = e._id;
     clone.querySelector(".title").textContent = e.title;
@@ -169,23 +384,6 @@ function updateDest(e, dir) {
     document.querySelector(`article[data-id="${id}"]`).remove();
 
     put(id, data);
-}
-
-//PUT 
-function put(id, data) {
-    const postData = JSON.stringify(data);
-
-    fetch(endPoint + "/" + id, {
-            method: "put",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "x-apikey": `${APIKey}`,
-                "cache-control": "no-cache"
-            },
-            body: postData
-        })
-        .then(e => e.json())
-        .then(e => showCard(e));
 }
 
 function formatDate(e) {
