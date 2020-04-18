@@ -244,10 +244,9 @@ function get() {
 
 //POST
 function post(data) {
-    // document.querySelectorAll(`label`).forEach(label => label.classList.remove("move-label"));
+    showCard(data);
 
     const postData = JSON.stringify(data);
-
     fetch(endPoint + "?max=100", {
             method: "post",
             headers: {
@@ -258,7 +257,7 @@ function post(data) {
             body: postData
         })
         .then(e => e.json())
-        .then(e => showCard(e));
+        .then(e => console.log(e));
 }
 
 //PUT 
@@ -275,12 +274,11 @@ function put(id, data) {
             body: postData
         })
         .then(e => e.json())
-        .then(e => showCard(e));
+        .then(e => console.log(e));
 }
 
 //DELETE
 function deleteIt(id) {
-
     //Removes it immediately
     document.querySelector(`article[data-id="${id}"]`).remove();
 
@@ -383,13 +381,14 @@ function updateDest(e, dir) {
 
     document.querySelector(`article[data-id="${id}"]`).remove();
 
+    e.dest = newDest;
+    showCard(e);
+
     put(id, data);
 }
 
 function formatDate(e) {
-    console.log(e);
     let fullDate = e.deadline;
-    console.log(fullDate);
     let day = fullDate.substring(8, 10);
     let month = fullDate.substring(5, 7);
 
