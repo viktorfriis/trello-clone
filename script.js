@@ -18,8 +18,28 @@ function start() {
     get();
 }
 
+
+function todayDate() {
+    const currentDateTime = new Date();
+
+    let month = (currentDateTime.getMonth() + 1);
+    let day = currentDateTime.getDate();
+
+    if (day.toString().length === 1) {
+        day = "0" + day;
+    }
+
+    if (month.toString().length === 1) {
+        month = "0" + month;
+    }
+
+    return currentDateTime.getFullYear() + "-" + month + "-" + day;
+}
+
 function formInteractive() {
     HTML.form.setAttribute("novalidate", true);
+
+    document.querySelector("#inp-deadline").setAttribute("min", todayDate());
 
 
     elements.title.addEventListener("keyup", (e) => {
