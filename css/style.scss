@@ -1,3 +1,7 @@
+:root {
+    --card-color: white;
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -40,97 +44,69 @@ main {
 
     .card {
         margin-bottom: 10px;
+        position: relative;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        border-bottom: 5px solid white;
 
-        .top {
-            position: relative;
-            background-color: white;
-            padding: 20px;
-            padding-bottom: 5px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
 
-            h2 {
-                margin-top: 0;
-                font-size: 2rem;
-                margin-bottom: 5px;
+        h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 300;
+            width: 80%;
+            cursor: pointer;
+        }
+
+        .delete-this {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: transparent;
+            appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+
+            span {
+                font-size: 15px;
             }
+        }
 
-            p {
-                font-weight: 300;
-                margin: 5px 0;
-                font-size: 1.6rem;
-            }
+        .card-nav {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
 
-            .creator {
-                font-style: italic;
-                font-size: 1.2rem;
-                margin-top: 15px;
-            }
-
-            .delete-this {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background-color: transparent;
-                appearance: none;
-                border: none;
-                outline: none;
+            span {
                 cursor: pointer;
             }
 
-            .card-nav {
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                display: flex;
+            .visible {
+                opacity: 1;
+                cursor: pointer;
+            }
 
-                span {
-                    cursor: pointer;
-                }
-
-                .visible {
-                    opacity: 1;
-                    cursor: pointer;
-                }
-
-                .hidden {
-                    opacity: 0;
-                    cursor: default;
-                }
+            .hidden {
+                opacity: 0;
+                cursor: default;
             }
         }
-
-        .bottom {
-            background-color: #F1F1F1;
-            padding: 30px 20px;
-            font-weight: 300;
-            font-size: 1.6rem;
-            display: flex;
-            justify-content: space-around;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-
-            p {
-                margin: 0;
-            }
-
-            .material-icons {
-                transform: translateY(6px);
-            }
-        }
-    }
-
-    // #todo {}
-
-    // #progress {}
-
-    // #done {}
-
-    #add {
-        background-color: transparent;
     }
 }
 
+// #todo {}
+
+// #progress {}
+
+// #done {}
+
+#add {
+    background-color: transparent;
+}
 
 form {
     margin-top: 30px;
@@ -156,16 +132,8 @@ form {
             margin-left: 0;
             color: grey;
             font-size: 1.2rem;
-
-            // transform: translateY(29px) translateX(1px);
-            // pointer-events: none;
-            // transition: 0.2s;
         }
 
-        // .move-label {
-        //     font-size: 0.6rem;
-        //     transform: translateY(0) translateX(0);
-        // }
 
         input,
         textarea,
@@ -179,6 +147,19 @@ form {
             background-color: rgb(75, 75, 75);
             color: white;
             border-radius: 5px;
+            display: block;
+        }
+
+
+        #inp-estimate {
+            width: 50px;
+        }
+
+        #inp-deadline,
+        #inp-priority,
+        #inp-creator,
+        #inp-color {
+            width: 150px;
         }
 
         textarea {
@@ -192,9 +173,10 @@ form {
             outline: none;
         }
 
-        .add-new {
+        .add-new,
+        .clear-form {
             appearance: none;
-            width: 50%;
+            width: 45%;
             height: 40px;
             cursor: pointer;
             border: none;
@@ -204,30 +186,191 @@ form {
             border-radius: 5px;
         }
 
+        .clear-form {
+            background-color: transparent;
+            border: 1px solid gray;
+            color: gray;
+            margin-left: 4%;
+        }
+
+        #custom-color {
+            width: 30%;
+            padding: 0;
+            display: none;
+        }
+
+        .error {
+            color: red;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            z-index: 10;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            display: none;
+        }
+
         .add-new:disabled {
             background-color: rgb(75, 75, 75);
             color: rgb(184, 184, 184);
             cursor: default;
         }
 
-        .valid {
+        input:not([type="date"]):valid:not(:focus),
+        textarea:valid:not(:focus) {
             border: 1px solid green;
         }
 
-        .invalid {
+        input:not([type="date"]):invalid:not(:placeholder-shown):not(:focus),
+        textarea:invalid:not(:placeholder-shown):not(:focus) {
             border: 1px solid red;
         }
 
-        .error {
-            color: white;
-            margin-top: -24px;
-            margin-bottom: 20px;
-            background-color: red;
-            padding: 7px;
-            z-index: 10;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+        input:invalid:not(:placeholder-shown):not(:focus)+.error,
+        textarea:invalid:not(:placeholder-shown):not(:focus)+.error {
+            display: block;
+        }
+
+        select:valid:not(:focus)+.error {
             display: none;
         }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border: 1px solid grey;
+        }
+
+        .default {
+            border: none;
+        }
     }
+
+    .placeholder {
+        color: #747474;
+
+    }
+
+    .valid {
+        border: 1px solid green;
+    }
+
+    .invalid {
+        border: 1px solid red;
+    }
+}
+
+
+.popup {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+
+    .popup_content {
+        width: 50%;
+        min-height: 50%;
+        background-color: white;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .popup-delete,
+        .popup-close {
+            position: absolute;
+            bottom: 133px;
+            right: 30px;
+            background-color: transparent;
+            border: 1px solid black;
+            color: black;
+            height: 40px;
+            width: 100px;
+            cursor: pointer;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .popup-close {
+            width: 35px;
+            padding: 0;
+            margin: 0;
+            height: 35px;
+            border: none;
+            top: 30px;
+        }
+
+        p {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .top {
+            width: 100%;
+            height: 70%;
+            background-color: white;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            padding: 30px;
+            position: relative;
+
+            h2 {
+                margin-top: 0;
+                font-size: 4rem;
+                margin-bottom: 10px;
+            }
+
+            p+p {
+                margin-top: 20px;
+                font-size: 1.6rem;
+                font-style: italic;
+            }
+        }
+
+        .bottom {
+            width: 100%;
+            height: 30%;
+            background-color: var(--card-color);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+
+            p {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            p+p {
+                font-size: 1.8rem;
+                margin-bottom: 0;
+
+                span {
+                    font-size: 1.8rem;
+                    margin-right: 5px;
+                    transform: translateY(2px);
+                }
+
+                span+span {
+                    margin-right: 0;
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+
+}
+
+.open_popup {
+    opacity: 1;
+    pointer-events: all;
 }

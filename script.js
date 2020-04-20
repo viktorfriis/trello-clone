@@ -18,7 +18,6 @@ function start() {
     get();
 }
 
-
 function todayDate() {
     const currentDateTime = new Date();
 
@@ -40,148 +39,61 @@ function formInteractive() {
     HTML.form.setAttribute("novalidate", true);
 
     document.querySelector("#inp-deadline").setAttribute("min", todayDate());
+    document.querySelector(".clear-form").addEventListener("click", clearForm);
 
 
-    elements.title.addEventListener("keyup", (e) => {
-        if (e.keyCode === 9 || e.keyCode === 16) {
 
-        } else {
-            if (HTML.form.checkValidity()) {
-                document.querySelector(".add-new").disabled = false;
-            } else {
-                document.querySelector(".add-new").disabled = true;
-            }
-
-            if (elements.title.value != "") {
-                document.querySelector(".title-err").style.display = "none";
-                elements.title.classList.add("valid");
-                elements.title.classList.remove("invalid");
-            } else {
-                document.querySelector(".title-err").style.display = "block";
-                elements.title.classList.remove("valid");
-                elements.title.classList.add("invalid");
-            }
+    document.querySelectorAll("select").forEach(select => {
+        if (select.value === "*") {
+            select.classList.add("placeholder");
         }
+
+        select.addEventListener("change", () => {
+            select.classList.remove("placeholder");
+            select.classList.add("valid");
+        })
     })
 
-    elements.description.addEventListener("keyup", (e) => {
-        if (e.keyCode === 9 || e.keyCode === 16) {
-
-        } else {
-            if (HTML.form.checkValidity()) {
-                document.querySelector(".add-new").disabled = false;
-            } else {
-                document.querySelector(".add-new").disabled = true;
-            }
-
-            if (elements.description.checkValidity()) {
-                document.querySelector(".desc-err").style.display = "none";
-                elements.description.classList.add("valid");
-                elements.description.classList.remove("invalid");
-            } else {
-                if (elements.description.validity.tooShort) {
-                    document.querySelector(".desc-err").textContent = "Please describe the task with more than 1 character.";
-                } else {
-                    document.querySelector(".desc-err").textContent = "Please describe the task.";
-                }
-
-                document.querySelector(".desc-err").style.display = "block";
-                elements.description.classList.remove("valid");
-                elements.description.classList.add("invalid");
-            }
-        }
-    })
-
-    elements.creator.addEventListener("change", () => {
-        if (HTML.form.checkValidity()) {
-            document.querySelector(".add-new").disabled = false;
-        } else {
-            document.querySelector(".add-new").disabled = true;
-        }
-
-        if (elements.creator.value != "") {
-            document.querySelector(".creator-err").style.display = "none";
-            elements.creator.classList.add("valid");
-            elements.creator.classList.remove("invalid");
-        } else {
-            document.querySelector(".creator-err").style.display = "block";
-            elements.creator.classList.remove("valid");
-            elements.creator.classList.add("invalid");
-        }
-    })
-
-    elements.estimate.addEventListener("keyup", (e) => {
-        if (e.keyCode === 9 || e.keyCode === 16) {
-
-        } else {
-            if (HTML.form.checkValidity()) {
-                document.querySelector(".add-new").disabled = false;
-            } else {
-                document.querySelector(".add-new").disabled = true;
-            }
-
-            if (elements.estimate.value != "") {
-                document.querySelector(".estimate-err").style.display = "none";
-                elements.estimate.classList.add("valid");
-                elements.estimate.classList.remove("invalid");
-            } else {
-                document.querySelector(".estimate-err").textContent = "Please give a time estimate of the task."
-                document.querySelector(".estimate-err").style.display = "block";
-                elements.estimate.classList.remove("valid");
-                elements.estimate.classList.add("invalid");
-            }
-
-            if (elements.estimate.validity.rangeOverflow) {
-                document.querySelector(".estimate-err").textContent = "Estimate should be under 8 hours."
-                document.querySelector(".estimate-err").style.display = "block";
-                elements.estimate.classList.remove("valid");
-                elements.estimate.classList.add("invalid");
-            } else if (elements.estimate.validity.rangeUnderflow) {
-                console.log("under 0");
-                document.querySelector(".estimate-err").textContent = "Estimate should be at least 1 hour."
-                document.querySelector(".estimate-err").style.display = "block";
-                elements.estimate.classList.remove("valid");
-                elements.estimate.classList.add("invalid");
-            }
-        }
-    })
+    if (elements.deadline.validity.valueMissing) {
+        elements.deadline.classList.remove("valid");
+        document.querySelector(".deadline-err").style.display = "none";
+    }
 
     elements.deadline.addEventListener("change", () => {
-        if (HTML.form.checkValidity()) {
-            document.querySelector(".add-new").disabled = false;
-        } else {
-            document.querySelector(".add-new").disabled = true;
-        }
+        elements.deadline.classList.remove("placeholder");
+        elements.deadline.classList.add("valid");
+    })
 
-        if (elements.deadline.value != "") {
-            document.querySelector(".deadline-err").style.display = "none";
-            elements.deadline.classList.add("valid");
-            elements.deadline.classList.remove("invalid");
-        } else {
-            document.querySelector(".deadline-err").style.display = "block";
-            elements.deadline.classList.remove("valid");
+    elements.deadline.addEventListener("keyup", () => {
+        if (elements.deadline.value < todayDate()) {
             elements.deadline.classList.add("invalid");
+        } else {
+            elements.deadline.classList.remove("invalid");
+            elements.deadline.classList.remove("placeholder");
+            elements.deadline.classList.add("valid");
         }
     })
 
-    elements.priority.addEventListener("change", () => {
-        if (HTML.form.checkValidity()) {
-            document.querySelector(".add-new").disabled = false;
-        } else {
-            document.querySelector(".add-new").disabled = true;
-        }
-
-        if (elements.priority.value != "") {
-            document.querySelector(".priority-err").style.display = "none";
-            elements.priority.classList.add("valid");
-            elements.priority.classList.remove("invalid");
-        } else {
-            document.querySelector(".priority-err").style.display = "block";
-            elements.priority.classList.remove("valid");
-            elements.priority.classList.add("invalid");
+    elements.color.addEventListener("change", () => {
+        if (elements.color.value === "custom") {
+            console.log("ja")
+            document.querySelector("#custom-color").style.display = "block";
         }
     })
 
+
+    elements.estimate.addEventListener("keyup", (e) => {
+        if (!elements.estimate.value != "") {
+            document.querySelector(".estimate-err").textContent = "Please give a time estimate of the task."
+        }
+        if (elements.estimate.validity.rangeOverflow) {
+            document.querySelector(".estimate-err").textContent = "Estimate should be under 8 hours."
+        } else if (elements.estimate.validity.rangeUnderflow) {
+            console.log("under 0");
+            document.querySelector(".estimate-err").textContent = "Estimate should be at least 1 hour."
+        }
+
+    })
 
     HTML.form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -196,36 +108,14 @@ function formInteractive() {
                 estimate: elements.estimate.value,
                 deadline: elements.deadline.value,
                 priority: elements.priority.value,
-                dest: "todo"
+                dest: "todo",
+                color: (elements.color.value === "custom") ? elements.customColor.value : elements.color.value
             };
 
             clearForm();
             post(data);
         } else {
             console.log("Not valid form");
-            // if (!elements.title.checkValidity()) {
-            //     document.querySelector(".title-err").style.display = "block";
-            // }
-
-            // if (!elements.description.checkValidity()) {
-            //     document.querySelector(".desc-err").style.display = "block";
-            // }
-
-            // if (!elements.creator.checkValidity()) {
-            //     document.querySelector(".creator-err").style.display = "block";
-            // }
-
-            // if (!elements.estimate.checkValidity()) {
-            //     document.querySelector(".estimate-err").style.display = "block";
-            // }
-
-            // if (!elements.deadline.checkValidity()) {
-            //     document.querySelector(".deadline-err").style.display = "block";
-            // }
-
-            // if (!elements.priority.checkValidity()) {
-            //     document.querySelector(".priority-err").style.display = "block";
-            // }
         }
     })
 }
@@ -233,19 +123,23 @@ function formInteractive() {
 function clearForm() {
     elements.title.value = "";
     elements.description.value = "";
-    elements.creator.value = "";
+    elements.creator.value = "*";
     elements.estimate.value = "";
     elements.deadline.value = "";
-    elements.priority.value = "";
+    elements.priority.value = "*";
+    elements.color.value = "*";
 
-    elements.title.classList.remove("valid");
-    elements.description.classList.remove("valid");
-    elements.creator.classList.remove("valid");
-    elements.estimate.classList.remove("valid");
+    document.querySelectorAll("select").forEach(select => {
+        select.classList.add("placeholder");
+        select.classList.remove("valid");
+    })
+
+    document.querySelector("#custom-color").style.display = "none";
+
+    elements.deadline.classList.add("placeholder");
     elements.deadline.classList.remove("valid");
-    elements.priority.classList.remove("valid");
 
-    document.querySelector(".add-new").disabled = true;
+
 }
 
 //GET
@@ -299,6 +193,7 @@ function put(id, data) {
 
 //DELETE
 function deleteIt(id) {
+    console.log("DELETING ID: " + id);
     //Removes it immediately
     document.querySelector(`article[data-id="${id}"]`).remove();
 
@@ -330,11 +225,13 @@ function showCard(e) {
 
     clone.querySelector(".card").dataset.id = e._id;
     clone.querySelector(".title").textContent = e.title;
-    clone.querySelector(".desc").textContent = e.description;
-    clone.querySelector(".creator").textContent += e.creator;
-    clone.querySelector(".estimate span+span").textContent = " " + e.estimate + "h";
-    clone.querySelector(".deadline span+span").textContent = " " + formatDate(e);
-    clone.querySelector(".priority span+span").textContent = " " + e.priority;
+    clone.querySelector(".card").style.borderBottom = `5px solid ${e.color}`;
+
+    // clone.querySelector(".desc").textContent = e.description;
+    // clone.querySelector(".creator").textContent += e.creator;
+    // clone.querySelector(".estimate span+span").textContent = " " + e.estimate + "h";
+    // clone.querySelector(".deadline span+span").textContent = " " + formatDate(e);
+    // clone.querySelector(".priority span+span").textContent = " " + e.priority;
 
 
     // clone.querySelector("button.update-this").addEventListener("click", () => {
@@ -379,7 +276,37 @@ function showCard(e) {
         deleteIt(e._id);
     })
 
+    clone.querySelector(".title").addEventListener("click", () => {
+        openPopup(e);
+    })
+
     document.querySelector(`#${dest} .cards`).appendChild(clone);
+}
+
+function openPopup(e) {
+    console.log(e);
+
+    document.querySelector(".popup").classList.add("open_popup");
+
+    document.querySelector(".popup").style.setProperty('--card-color', e.color);
+    document.querySelector(".top h2").textContent = e.title;
+    document.querySelector(".top p").textContent = e.description;
+    document.querySelector(".top p+p").textContent = "Added by: " + e.creator;
+
+    document.querySelector(".popup-deadline p+p span+span").textContent = formatDate(e);
+    document.querySelector(".popup-estimate p+p span+span").textContent = e.estimate + "hr";
+    document.querySelector(".popup-priority p+p span+span").textContent = e.priority;
+
+    document.querySelector(".bottom").style.color = getCorrectTextColor(e.color);
+
+    document.querySelector(".popup-close").addEventListener("click", () => {
+        document.querySelector(".popup").classList.remove("open_popup");
+    })
+
+    document.querySelector(".popup-delete").addEventListener("click", () => {
+        document.querySelector(".popup").classList.remove("open_popup");
+        deleteIt(e._id);
+    })
 }
 
 function updateDest(e, dir) {
@@ -414,4 +341,38 @@ function formatDate(e) {
 
     return day + "/" + month;
 
+}
+
+//Stolen from https://codepen.io/davidhalford/pen/ywEva?editors=0010
+//Calculates whether the text should be black or white, based on the constrast
+function getCorrectTextColor(hex) {
+    let threshold = 130; /* about half of 256. Lower threshold equals more dark text on dark background  */
+
+    let hRed = hexToR(hex);
+    let hGreen = hexToG(hex);
+    let hBlue = hexToB(hex);
+
+
+    function hexToR(h) {
+        return parseInt((cutHex(h)).substring(0, 2), 16)
+    }
+
+    function hexToG(h) {
+        return parseInt((cutHex(h)).substring(2, 4), 16)
+    }
+
+    function hexToB(h) {
+        return parseInt((cutHex(h)).substring(4, 6), 16)
+    }
+
+    function cutHex(h) {
+        return (h.charAt(0) == "#") ? h.substring(1, 7) : h
+    }
+
+    let cBrightness = ((hRed * 299) + (hGreen * 587) + (hBlue * 114)) / 1000;
+    if (cBrightness > threshold) {
+        return "#000000";
+    } else {
+        return "#ffffff";
+    }
 }
