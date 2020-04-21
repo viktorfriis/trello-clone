@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trello Clone</title>
+    <link rel="stylesheet" href="/style.78032849.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="/style.78032849.js"></script></head>
+
+<body>
+    <main>
+        <section id="todo">
+            <h1>To do</h1>
+            <section class="cards">
+            </section>
+        </section>
+        <section id="progress">
+            <h1>In progress</h1>
+            <section class="cards"></section>
+        </section>
+        <section id="done">
+            <h1>Done</h1>
+            <section class="cards"></section>
+        </section>
+        <section id="add">
+            <form action="#">
+                <fieldset>
+                    <legend>Add card</legend>
+                    <label for="inp-title">Title</label>
+                    <input type="text" name="title" id="inp-title" placeholder="Card title" required="">
+                    <p class="error title-err">Please pick a title for this task.</p>
+
+                    <label for="inp-desc">Description</label>
+                    <textarea id="inp-desc" name="description" minlength="2" placeholder="Describe the card" required=""></textarea>
+                    <p class="error desc-err">Please describe this task.</p>
+
+                    <label for="inp-creator">Creator</label>
+                    <select name="creator" id="inp-creator" required="">
+                        <option disabled="" hidden="" selected="" value="*">Pick a creator</option>
+                        <option value="Viktor Kjeldal">Viktor Kjeldal</option>
+                        <option value="John Appleseed">John Appleseed</option>
+                        <option value="Albert Einstein">Albert Einstein</option>
+                    </select>
+                    <p class="error creator-err">Please pick the creator of the task.</p>
+
+                    <label for="inp-estimate">Estimate time (between 1 - 8 hours)</label>
+                    <input type="number" name="estimate" id="inp-estimate" min="1" max="8" placeholder="1-8" required="">
+                    <p class="error estimate-err">Please give a time estimate of the task.</p>
+
+                    <label for=" inp-deadline">Deadline</label>
+                    <input type="date" class="placeholder" name="deadline" id="inp-deadline" placeholder="xx/xx/xxx" required="">
+                    <p class="error deadline-err">Please pick a deadline for the task.</p>
+
+                    <label for="inp-priority">Priority</label>
+                    <select name="priority" id="inp-priority" required="">
+                        <option disabled="" hidden="" selected="" value="*">Pick a priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <p class="error priority-err">Please pick the priority of this task.</p>
+
+                    <label for="inp-color">Color</label>
+                    <select name="color" id="inp-color" required="">
+                        <option disabled="" hidden="" selected="" value="*">Pick a color</option>
+                        <option value="#dbdbdb">Default (gray)</option>
+                        <option value="#3792cb">Blue</option>
+                        <option value="#bb0a1e">Red</option>
+                        <option value="#197419">Green</option>
+                        <option value="#ff6600">Orange</option>
+                        <option value="#ff7bb4">Pink</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <input type="color" name="customColor" id="custom-color">
+                    <p class="error color-err">Please pick the priority of this task.</p>
+                    <button class="add-new" type="submit">Add new card</button>
+                    <button class="clear-form">Start over</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+    <div class="popup">
+        <article class="popup_content">
+            <div class="top">
+                <h2></h2>
+                <p></p>
+                <p>Added by: </p>
+                <button class="popup-close"><span class="material-icons">
+                        highlight_off
+                    </span></button>
+            </div>
+            <div class="bottom">
+                <div class="popup-deadline">
+                    <p>Deadline</p>
+                    <p><span class="material-icons">
+                            event
+                        </span><span></span></p>
+                </div>
+                <div class="popup-estimate">
+                    <p>Time estimate</p>
+                    <p><span class="material-icons">
+                            schedule
+                        </span><span></span></p>
+                </div>
+                <div class="popup-priority">
+                    <p>Priority</p>
+                    <p><span class="material-icons">
+                            priority_high
+                        </span><span></span></p>
+                </div>
+            </div>
+            <button class="popup-delete">Delete card</button>
+        </article>
+    </div>
+
+    <template>
+        <article class="card">
+            <h2 class="title"></h2>
+            <div class="color"></div>
+            <button class="delete-this"><span class="material-icons">
+                    remove_circle_outline
+                </span></button>
+            <div class="card-nav">
+                <span class="material-icons move-left">
+                    navigate_before
+                </span>
+                <span class="material-icons move-right">
+                    navigate_next
+                </span>
+            </div>
+        </article>
+
+
+        <!-- 
+        <article class="card">
+            <div class="top">
+                <h2 class="title"></h2>
+                <p class="desc"></p>
+                <p class="creator">Added by: </p>
+                <button class="delete-this"><span class="material-icons">
+                        remove_circle_outline
+                    </span></button>
+                <div class="card-nav">
+                    <span class="material-icons move-left">
+                        navigate_before
+                    </span>
+                    <span class="material-icons move-right">
+                        navigate_next
+                    </span>
+                </div>
+            </div>
+            <div class="bottom">
+                <p class="estimate"><span class="material-icons">
+                        schedule
+                    </span><span></span></p>
+                <p class="deadline"><span class="material-icons">
+                        event
+                    </span><span></span></p>
+                <p class="priority"><span class="material-icons">
+                        priority_high
+                    </span><span></span></p>
+            </div>
+        </article> -->
+    </template>
+    <script src="/script.75da7f30.js"></script>
+</body>
+
+</html>

@@ -1,10 +1,14 @@
 "use strict";
+
+import moment from "moment";
+
 document.addEventListener("DOMContentLoaded", start);
 
 const HTML = {};
 const endPoint = "https://frontendspring20-f2e0.restdb.io/rest/cards";
 const APIKey = "5e957b2e436377171a0c2346";
 let elements;
+
 
 function start() {
     console.log("start");
@@ -18,30 +22,11 @@ function start() {
     get();
 }
 
-function todayDate() {
-    const currentDateTime = new Date();
-
-    let month = (currentDateTime.getMonth() + 1);
-    let day = currentDateTime.getDate();
-
-    if (day.toString().length === 1) {
-        day = "0" + day;
-    }
-
-    if (month.toString().length === 1) {
-        month = "0" + month;
-    }
-
-    return currentDateTime.getFullYear() + "-" + month + "-" + day;
-}
-
 function formInteractive() {
     HTML.form.setAttribute("novalidate", true);
 
-    document.querySelector("#inp-deadline").setAttribute("min", todayDate());
+    document.querySelector("#inp-deadline").setAttribute("min", moment().format("YYYY-MM-DD"));
     document.querySelector(".clear-form").addEventListener("click", clearForm);
-
-
 
     document.querySelectorAll("select").forEach(select => {
         if (select.value === "*") {
@@ -65,7 +50,7 @@ function formInteractive() {
     })
 
     elements.deadline.addEventListener("keyup", () => {
-        if (elements.deadline.value < todayDate()) {
+        if (moment(elements.deadline.value).isBefore(moment())) {
             elements.deadline.classList.add("invalid");
         } else {
             elements.deadline.classList.remove("invalid");
@@ -286,6 +271,9 @@ function showCard(e) {
 function openPopup(e) {
     console.log(e);
 
+    let dateFormatted = formatDate(e);
+    console.log(dateFormatted);
+
     document.querySelector(".popup").classList.add("open_popup");
 
     document.querySelector(".popup").style.setProperty('--card-color', e.color);
@@ -293,7 +281,7 @@ function openPopup(e) {
     document.querySelector(".top p").textContent = e.description;
     document.querySelector(".top p+p").textContent = "Added by: " + e.creator;
 
-    document.querySelector(".popup-deadline p+p span+span").textContent = formatDate(e);
+    document.querySelector(".popup-deadline p+p span+span").textContent = moment().to(dateFormatted);
     document.querySelector(".popup-estimate p+p span+span").textContent = e.estimate + "hr";
     document.querySelector(".popup-priority p+p span+span").textContent = e.priority;
 
@@ -334,15 +322,6 @@ function updateDest(e, dir) {
     put(id, data);
 }
 
-function formatDate(e) {
-    let fullDate = e.deadline;
-    let day = fullDate.substring(8, 10);
-    let month = fullDate.substring(5, 7);
-
-    return day + "/" + month;
-
-}
-
 //Stolen from https://codepen.io/davidhalford/pen/ywEva?editors=0010
 //Calculates whether the text should be black or white, based on the constrast
 function getCorrectTextColor(hex) {
@@ -375,4 +354,9 @@ function getCorrectTextColor(hex) {
     } else {
         return "#ffffff";
     }
+}
+
+function formatDate(e) {
+    console.log("formatting");
+    return moment(e.deadline).format("L");
 }
