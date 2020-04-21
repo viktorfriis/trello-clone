@@ -206,6 +206,16 @@ form {
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             display: none;
+
+            span.material-icons {
+                font-size: 1.6rem;
+                margin-right: 5px;
+                transform: translateY(4px);
+            }
+        }
+
+        .show {
+            display: block;
         }
 
         .add-new:disabled {
@@ -229,9 +239,9 @@ form {
             display: block;
         }
 
-        select:valid:not(:focus)+.error {
-            display: none;
-        }
+        // select:valid:not(:focus)+.error {
+        //     display: none;
+        // }
 
         input:focus,
         textarea:focus,
@@ -243,6 +253,8 @@ form {
             border: none;
         }
     }
+
+
 
     .placeholder {
         color: #747474;
@@ -319,6 +331,7 @@ form {
             border-top-right-radius: 5px;
             padding: 30px;
             position: relative;
+            padding-right: 150px;
 
             h2 {
                 margin-top: 0;

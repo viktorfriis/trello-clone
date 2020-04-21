@@ -3,9 +3,8 @@
 }
 
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -19,33 +18,27 @@ html {
 
 main {
   width: 100vw;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding: 10px;
   grid-gap: 5px;
 }
-
 main section {
   height: calc(100vh - 20px);
   background-color: #4b4b4b;
   padding: 0 20px;
   border-radius: 5px;
 }
-
 main section h1 {
   font-size: 3rem;
   color: white;
 }
-
 main .cards {
   height: auto;
   padding: 0;
   overflow: scroll;
   height: calc(100vh - 130px);
 }
-
 main .card {
   margin-bottom: 10px;
   position: relative;
@@ -54,7 +47,6 @@ main .card {
   border-radius: 5px;
   border-bottom: 5px solid white;
 }
-
 main .card h2 {
   margin: 0;
   font-size: 1.6rem;
@@ -62,43 +54,33 @@ main .card h2 {
   width: 80%;
   cursor: pointer;
 }
-
 main .card .delete-this {
   position: absolute;
   top: 5px;
   right: 5px;
   background-color: transparent;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 0;
 }
-
 main .card .delete-this span {
   font-size: 15px;
 }
-
 main .card .card-nav {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 main .card .card-nav span {
   cursor: pointer;
 }
-
 main .card .card-nav .visible {
   opacity: 1;
   cursor: pointer;
 }
-
 main .card .card-nav .hidden {
   opacity: 0;
   cursor: default;
@@ -111,11 +93,9 @@ main .card .card-nav .hidden {
 form {
   margin-top: 30px;
 }
-
 form fieldset {
   border: none;
 }
-
 form fieldset legend {
   font-size: 3rem;
   font-weight: bold;
@@ -123,19 +103,16 @@ form fieldset legend {
   margin-bottom: 10px;
   color: white;
 }
-
 form fieldset label,
 form fieldset input {
   display: block;
 }
-
 form fieldset label {
   margin-bottom: 3px;
   margin-left: 0;
   color: grey;
   font-size: 1.2rem;
 }
-
 form fieldset input,
 form fieldset textarea,
 form fieldset select {
@@ -150,33 +127,26 @@ form fieldset select {
   border-radius: 5px;
   display: block;
 }
-
 form fieldset #inp-estimate {
   width: 50px;
 }
-
 form fieldset #inp-priority,
 form fieldset #inp-creator,
 form fieldset #inp-color {
   width: 150px;
 }
-
 form fieldset textarea {
   padding-top: 10px;
   height: 80px;
 }
-
 form fieldset input:focus,
 form fieldset textarea:focus,
 form fieldset select:focus {
   outline: none;
 }
-
 form fieldset .add-new,
 form fieldset .clear-form {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   width: 45%;
   height: 40px;
   cursor: pointer;
@@ -186,20 +156,17 @@ form fieldset .clear-form {
   color: white;
   border-radius: 5px;
 }
-
 form fieldset .clear-form {
   background-color: transparent;
   border: 1px solid gray;
   color: gray;
   margin-left: 4%;
 }
-
 form fieldset #custom-color {
   width: 30%;
   padding: 0;
   display: none;
 }
-
 form fieldset .error {
   color: red;
   margin-top: -15px;
@@ -209,50 +176,45 @@ form fieldset .error {
   border-bottom-right-radius: 5px;
   display: none;
 }
-
+form fieldset .error span.material-icons {
+  font-size: 1.6rem;
+  margin-right: 5px;
+  transform: translateY(4px);
+}
+form fieldset .show {
+  display: block;
+}
 form fieldset .add-new:disabled {
   background-color: #4b4b4b;
   color: #b8b8b8;
   cursor: default;
 }
-
-form fieldset input:not([type="date"]):valid:not(:focus),
+form fieldset input:not([type=date]):valid:not(:focus),
 form fieldset textarea:valid:not(:focus) {
   border: 1px solid green;
 }
-
-form fieldset input:not([type="date"]):invalid:not(:placeholder-shown):not(:focus),
+form fieldset input:not([type=date]):invalid:not(:placeholder-shown):not(:focus),
 form fieldset textarea:invalid:not(:placeholder-shown):not(:focus) {
   border: 1px solid red;
 }
-
 form fieldset input:invalid:not(:placeholder-shown):not(:focus) + .error,
 form fieldset textarea:invalid:not(:placeholder-shown):not(:focus) + .error {
   display: block;
 }
-
-form fieldset select:valid:not(:focus) + .error {
-  display: none;
-}
-
 form fieldset input:focus,
 form fieldset textarea:focus,
 form fieldset select:focus {
   border: 1px solid grey;
 }
-
 form fieldset .default {
   border: none;
 }
-
 form .placeholder {
   color: #747474;
 }
-
 form .valid {
   border: 1px solid green;
 }
-
 form .invalid {
   border: 1px solid red;
 }
@@ -263,39 +225,23 @@ form .invalid {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-
 .popup .popup_content {
   width: 50%;
   min-height: 50%;
   background-color: white;
   border-radius: 5px;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .popup .popup_content .popup-delete,
 .popup .popup_content .popup-close {
   position: absolute;
@@ -310,7 +256,6 @@ form .invalid {
   outline: none;
   border-radius: 5px;
 }
-
 .popup .popup_content .popup-close {
   width: 35px;
   padding: 0;
@@ -319,12 +264,10 @@ form .invalid {
   border: none;
   top: 30px;
 }
-
 .popup .popup_content p {
   font-size: 2rem;
   margin: 0;
 }
-
 .popup .popup_content .top {
   width: 100%;
   height: 70%;
@@ -333,20 +276,18 @@ form .invalid {
   border-top-right-radius: 5px;
   padding: 30px;
   position: relative;
+  padding-right: 150px;
 }
-
 .popup .popup_content .top h2 {
   margin-top: 0;
   font-size: 4rem;
   margin-bottom: 10px;
 }
-
 .popup .popup_content .top p + p {
   margin-top: 20px;
   font-size: 1.6rem;
   font-style: italic;
 }
-
 .popup .popup_content .bottom {
   width: 100%;
   height: 30%;
@@ -354,35 +295,26 @@ form .invalid {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   text-align: center;
 }
-
 .popup .popup_content .bottom p {
   font-size: 1rem;
   margin-bottom: 10px;
 }
-
 .popup .popup_content .bottom p + p {
   font-size: 1.8rem;
   margin-bottom: 0;
 }
-
 .popup .popup_content .bottom p + p span {
   font-size: 1.8rem;
   margin-right: 5px;
-  -webkit-transform: translateY(2px);
-          transform: translateY(2px);
+  transform: translateY(2px);
 }
-
 .popup .popup_content .bottom p + p span + span {
   margin-right: 0;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
 }
 
 .open_popup {
@@ -390,5 +322,4 @@ form .invalid {
   pointer-events: all;
 }
 
-
-/*# sourceMappingURL=/style.78032849.css.map */
+/*# sourceMappingURL=/style.6b54f5b7.css.map */

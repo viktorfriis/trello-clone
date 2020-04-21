@@ -4770,14 +4770,18 @@ function formInteractive() {
     elements.deadline.classList.remove("placeholder");
     elements.deadline.classList.add("valid");
   });
-  elements.deadline.addEventListener("keyup", function () {
+  elements.deadline.addEventListener("blur", function () {
     if ((0, _moment.default)(elements.deadline.value).isBefore((0, _moment.default)())) {
       elements.deadline.classList.add("invalid");
+      document.querySelector(".deadline-err").style.display = "block";
     } else {
       elements.deadline.classList.remove("invalid");
       elements.deadline.classList.remove("placeholder");
       elements.deadline.classList.add("valid");
     }
+  });
+  elements.deadline.addEventListener("focus", function () {
+    document.querySelector(".deadline-err").style.display = "none";
   });
   elements.color.addEventListener("change", function () {
     if (elements.color.value === "custom") {
@@ -4787,14 +4791,14 @@ function formInteractive() {
   });
   elements.estimate.addEventListener("keyup", function (e) {
     if (!elements.estimate.value != "") {
-      document.querySelector(".estimate-err").textContent = "Please give a time estimate of the task.";
+      document.querySelector(".estimate-err span+span").textContent = "Please give a time estimate of the task.";
     }
 
     if (elements.estimate.validity.rangeOverflow) {
-      document.querySelector(".estimate-err").textContent = "Estimate should be under 8 hours.";
+      document.querySelector(".estimate-err span+span").textContent = "Estimate should be under 8 hours.";
     } else if (elements.estimate.validity.rangeUnderflow) {
       console.log("under 0");
-      document.querySelector(".estimate-err").textContent = "Estimate should be at least 1 hour.";
+      document.querySelector(".estimate-err span+span").textContent = "Estimate should be at least 1 hour.";
     }
   });
   HTML.form.addEventListener("submit", function (e) {
@@ -4816,6 +4820,63 @@ function formInteractive() {
       post(data);
     } else {
       console.log("Not valid form");
+
+      if (!elements.title.checkValidity()) {
+        console.log("title invalid");
+        elements.title.classList.add("invalid");
+        document.querySelector(".title-err").classList.add("show");
+        elements.title.addEventListener("focus", function () {
+          document.querySelector(".title-err").classList.remove("show");
+        });
+      }
+
+      if (!elements.description.checkValidity()) {
+        console.log("description invalid");
+        elements.description.classList.add("invalid");
+        document.querySelector(".desc-err").classList.add("show");
+        elements.description.addEventListener("focus", function () {
+          document.querySelector(".desc-err").classList.remove("show");
+        });
+      }
+
+      if (elements.creator.value === "*") {
+        console.log("creator invalid");
+        elements.creator.classList.add("invalid");
+        document.querySelector(".creator-err").classList.add("show");
+        elements.creator.addEventListener("focus", function () {
+          elements.creator.classList.remove("invalid");
+          document.querySelector(".creator-err").classList.remove("show");
+        });
+      }
+
+      if (!elements.estimate.checkValidity()) {
+        console.log("estimate invalid");
+        elements.estimate.classList.add("invalid");
+        document.querySelector(".estimate-err").classList.add("show");
+        elements.estimate.addEventListener("focus", function () {
+          document.querySelector(".estimate-err").classList.remove("show");
+        });
+      }
+
+      if (!elements.deadline.checkValidity()) {
+        console.log("deadline invalid");
+        elements.deadline.classList.add("invalid");
+        document.querySelector(".deadline-err").classList.add("show");
+        elements.deadline.addEventListener("focus", function () {
+          elements.deadline.classList.remove("invalid");
+          document.querySelector(".deadline-err").classList.remove("show");
+        });
+      }
+
+      if (elements.priority.value === "*") {
+        console.log("priority invalid");
+        elements.priority.classList.add("invalid");
+        document.querySelector(".priority-err").classList.add("show");
+        elements.priority.addEventListener("focus", function () {
+          elements.priority.classList.remove("invalid");
+          document.querySelector(".priority-err").classList.remove("show");
+        });
+      }
     }
   });
 }
@@ -4835,6 +4896,9 @@ function clearForm() {
   document.querySelector("#custom-color").style.display = "none";
   elements.deadline.classList.add("placeholder");
   elements.deadline.classList.remove("valid");
+  elements.estimate.classList.remove("invalid");
+  elements.description.classList.remove("invalid");
+  elements.title.classList.remove("invalid");
 } //GET
 
 
@@ -5081,7 +5145,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57814" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58252" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
